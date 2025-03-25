@@ -74,8 +74,3 @@ make test
   - `fibonacci_test.cpp` - тесты для чисел Фибоначчи
   - `palindrome_test.cpp` - тесты для проверки палиндромов
   - `linked_list_test.cpp` - тесты для связного списка
-
-- `examples/` - примеры использования
-  - `fibonacci_example.cpp` - пример работы с числами Фибоначчи
-  - `palindrome_example.cpp` - пример проверки палиндромов
-  - `linked_list_example.cpp` - пример работы со связным списком
