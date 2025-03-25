@@ -1,0 +1,47 @@
+cmake_minimum_required(VERSION 3.10)
+project(algorithms_tasks VERSION 1.0)
+
+# Устанавливаем стандарт C++
+set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+# Включаем директории с заголовочными файлами
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src)
+
+# Библиотека с нашими алгоритмами
+add_library(algorithms INTERFACE)
+target_include_directories(algorithms INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/src)
+
+# Основная программа
+add_executable(main src/main.cpp)
+target_link_libraries(main algorithms)
+
+# Примеры
+add_executable(fibonacci_example examples/fibonacci_example.cpp)
+target_link_libraries(fibonacci_example algorithms)
+
+add_executable(palindrome_example examples/palindrome_example.cpp)
+target_link_libraries(palindrome_example algorithms)
+
+add_executable(linked_list_example examples/linked_list_example.cpp)
+target_link_libraries(linked_list_example algorithms)
+
+# Тесты с GoogleTest
+enable_testing()
+find_package(GTest REQUIRED)
+include_directories(${GTEST_INCLUDE_DIRS})
+
+# Добавляем исполняемые файлы для тестов
+add_executable(fibonacci_test tests/fibonacci_test.cpp)
+target_link_libraries(fibonacci_test algorithms ${GTEST_BOTH_LIBRARIES} pthread)
+
+add_executable(palindrome_test tests/palindrome_test.cpp)
+target_link_libraries(palindrome_test algorithms ${GTEST_BOTH_LIBRARIES} pthread)
+
+add_executable(linked_list_test tests/linked_list_test.cpp)
+target_link_libraries(linked_list_test algorithms ${GTEST_BOTH_LIBRARIES} pthread)
+
+# Запускаем тесты
+add_test(NAME FibonacciTest COMMAND fibonacci_test)
+add_test(NAME PalindromeTest COMMAND palindrome_test)
+add_test(NAME LinkedListTest COMMAND linked_list_test)
